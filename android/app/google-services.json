@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "100266383107",
+    "project_id": "playbyplay-7cc1b",
+    "storage_bucket": "playbyplay-7cc1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100266383107:android:cf53a6285b659d15773b36",
+        "android_client_info": {
+          "package_name": "com.google.antigravity.playbyplay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm5ZxRXuGp26zeoZ7ndoIM-aL9lvedl-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
