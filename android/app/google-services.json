@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "431365543284",
+    "project_id": "local-league-live",
+    "storage_bucket": "local-league-live.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431365543284:android:8df07e50f05b669b198821",
+        "android_client_info": {
+          "package_name": "com.kalviumcommunity.local_league_live"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431365543284-9h329hauv7qdt6afitkm709v23usmr29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCawQfEXmnmBbYvpUc1afY-6MzVqGu6QF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431365543284-9h329hauv7qdt6afitkm709v23usmr29.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "431365543284-vh9e8iet3v3iie2jbabm6v0oo5roj096.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kalviumcommunity.localLeagueLive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
