@@ -9,6 +9,8 @@ class EventModel {
   final int runs;
   final bool isWicket;
   final String? description;
+  final String? batsmanId;
+  final String? batsmanName;
   final DateTime createdAt;
 
   EventModel({
@@ -20,6 +22,8 @@ class EventModel {
     required this.runs,
     required this.isWicket,
     this.description,
+    this.batsmanId,
+    this.batsmanName,
     required this.createdAt,
   });
 
@@ -34,6 +38,8 @@ class EventModel {
       runs: data['runs'] ?? 0,
       isWicket: data['isWicket'] ?? false,
       description: data['description'],
+      batsmanId: data['batsmanId'],
+      batsmanName: data['batsmanName'],
       createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
@@ -47,6 +53,8 @@ class EventModel {
       'runs': runs,
       'isWicket': isWicket,
       'description': description,
+      'batsmanId': batsmanId,
+      'batsmanName': batsmanName,
       'createdAt': Timestamp.fromDate(createdAt),
     };
   }

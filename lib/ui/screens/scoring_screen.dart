@@ -19,7 +19,19 @@ class _ScoringScreenState extends State<ScoringScreen> {
   bool _isWicket = false;
   final TextEditingController _descriptionController = TextEditingController();
   
+  String? _selectedBatsmanId;
+  String? _selectedBatsmanName;
+
   bool _isSubmitting = false;
+
+  // Static list for MVP purposes since dynamic rosters are not built out
+  final List<Map<String, String>> _dummyPlayers = [
+    {'id': 'player_1', 'name': 'Player 1'},
+    {'id': 'player_2', 'name': 'Player 2'},
+    {'id': 'player_3', 'name': 'Player 3'},
+    {'id': 'player_4', 'name': 'Player 4'},
+    {'id': 'player_5', 'name': 'Player 5'},
+  ];
 
   Future<void> _submitEvent() async {
     setState(() => _isSubmitting = true);
@@ -31,6 +43,8 @@ class _ScoringScreenState extends State<ScoringScreen> {
         description: _descriptionController.text.trim().isNotEmpty 
             ? _descriptionController.text.trim() 
             : null,
+        batsmanId: _selectedBatsmanId,
+        batsmanName: _selectedBatsmanName,
       );
       
       // Reset form on success
@@ -39,6 +53,10 @@ class _ScoringScreenState extends State<ScoringScreen> {
           _selectedRuns = 0;
           _isWicket = false;
           _descriptionController.clear();
+          // We can optionally leave the batsman selected for the next ball, 
+          // but for MVP reset is cleaner to avoid accidentally crediting runs to previous bats.
+          _selectedBatsmanId = null;
+          _selectedBatsmanName = null;
         });
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Event added successfully!')),
@@ -95,6 +113,8 @@ class _ScoringScreenState extends State<ScoringScreen> {
                 const Text('Record Next Ball', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const Divider(),
                 const SizedBox(height: 16),
+                _buildBatsmanSelector(),
+                const SizedBox(height: 24),
                 _buildRunsSelector(),
                 const SizedBox(height: 24),
                 _buildWicketToggle(),
@@ -175,6 +195,51 @@ class _ScoringScreenState extends State<ScoringScreen> {
           '(${score.overs})',
           style: TextStyle(color: isBatting ? Colors.amber.shade200 : Colors.white54, fontSize: 14),
         )
+      ],
+    );
+  }
+
+  Widget _buildBatsmanSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('On Strike (Batsman):', style: TextStyle(fontWeight: FontWeight.w600)),
+        const SizedBox(height: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade400),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: DropdownButton<String?>(
+            isExpanded: true,
+            underline: const SizedBox(), // Remove default underline
+            value: _selectedBatsmanId,
+            hint: const Text('Select Batsman (Optional)'),
+            items: [
+              const DropdownMenuItem<String?>(
+                value: null,
+                child: Text('None'),
+              ),
+              ..._dummyPlayers.map((player) {
+                return DropdownMenuItem<String?>(
+                  value: player['id'],
+                  child: Text(player['name']!),
+                );
+              }),
+            ],
+            onChanged: (String? newId) {
+              setState(() {
+                _selectedBatsmanId = newId;
+                if (newId == null) {
+                  _selectedBatsmanName = null;
+                } else {
+                  _selectedBatsmanName = _dummyPlayers.firstWhere((p) => p['id'] == newId)['name'];
+                }
+              });
+            },
+          ),
+        ),
       ],
     );
   }

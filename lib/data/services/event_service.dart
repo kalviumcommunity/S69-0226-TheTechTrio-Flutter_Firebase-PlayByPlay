@@ -26,6 +26,8 @@ class EventService {
     required int runs,
     required bool isWicket,
     String? description,
+    String? batsmanId,
+    String? batsmanName,
   }) async {
     await _db.runTransaction((transaction) async {
       DocumentReference matchRef = _db.collection('matches').doc(matchId);
@@ -71,6 +73,8 @@ class EventService {
         runs: runs,
         isWicket: isWicket,
         description: description,
+        batsmanId: batsmanId,
+        batsmanName: batsmanName,
         createdAt: DateTime.now(),
       );
 
